@@ -3,19 +3,111 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Vibrant purple to pink gradient */
+  --gradient-start: #4f46e5;
+  --gradient-mid: #7c3aed;
+  --gradient-end: #ec4899;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Card colors */
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --card-border: rgba(255, 255, 255, 0.3);
+  --card-shadow: rgba(0, 0, 0, 0.1);
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(
+    135deg,
+    var(--gradient-start),
+    var(--gradient-mid),
+    var(--gradient-end)
+  );
+  min-height: 100vh;
+  background-attachment: fixed;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Glass effect for cards */
+.glass-effect {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 4px 6px -1px var(--card-shadow),
+    0 2px 4px -1px var(--card-shadow);
+}
+
+/* Input styles */
+.form-input {
+  @apply block w-full rounded-lg border px-4 py-2.5 text-sm text-gray-900;
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.5);
+  transition: all 0.2s ease;
+}
+
+.form-input:focus {
+  @apply ring-2 ring-purple-500 border-purple-500;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.form-input:hover {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* Task card hover effect */
+.task-card {
+  transition: all 0.3s ease;
+  border: 1px solid var(--card-border);
+}
+
+.task-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* Button styles */
+.btn-primary {
+  @apply px-4 py-2.5 text-sm font-medium text-white rounded-lg transition-all;
+  background: linear-gradient(
+    135deg,
+    var(--gradient-start),
+    var(--gradient-mid)
+  );
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--gradient-mid), var(--gradient-end));
+  transform: translateY(-1px);
+}
+
+/* Status badges */
+.status-badge {
+  @apply px-3 py-1 text-xs font-medium rounded-full;
+}
+
+.status-badge-pending {
+  background: rgba(234, 179, 8, 0.2);
+  color: #854d0e;
+}
+
+.status-badge-completed {
+  background: rgba(34, 197, 94, 0.2);
+  color: #166534;
 }

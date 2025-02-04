@@ -25,32 +25,49 @@ export default async function Home() {
   }));
 
   return (
-    <main className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Task Manager</h1>
+    <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto space-y-8">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold text-white mb-2 drop-shadow-lg">
+            Task Manager
+          </h1>
+          <p className="text-white/80 text-lg">
+            Organize your tasks efficiently
+          </p>
         </div>
 
         <div className="space-y-8">
-          <div className="bg-white rounded-lg shadow">
-            <div className="p-4 border-b">
+          <div className="glass-effect rounded-xl shadow-lg overflow-hidden">
+            <div className="p-6 border-b border-white/10">
               <h2 className="text-xl font-semibold text-gray-900">
                 Create New Task
               </h2>
             </div>
-            <Suspense fallback={<div className="p-4">Loading form...</div>}>
+            <Suspense
+              fallback={
+                <div className="p-6 text-center text-gray-500">
+                  Loading form...
+                </div>
+              }
+            >
               <TaskForm />
             </Suspense>
           </div>
 
-          <div className="bg-white rounded-lg shadow">
-            <div className="p-4 border-b">
+          <div className="glass-effect rounded-xl shadow-lg overflow-hidden">
+            <div className="p-6 border-b border-white/10">
               <h2 className="text-xl font-semibold text-gray-900">
                 Your Tasks
               </h2>
             </div>
-            <div className="p-4">
-              <Suspense fallback={<div>Loading tasks...</div>}>
+            <div className="p-6">
+              <Suspense
+                fallback={
+                  <div className="text-center text-gray-500">
+                    Loading tasks...
+                  </div>
+                }
+              >
                 <TaskList tasks={serializedTasks} />
               </Suspense>
             </div>

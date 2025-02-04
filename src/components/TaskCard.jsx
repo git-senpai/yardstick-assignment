@@ -70,41 +70,44 @@ export default function TaskCard({ task, onUpdate }) {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         whileHover={{ scale: 1.02 }}
-        className="bg-white rounded-lg shadow p-4 hover:shadow-md transition-shadow"
+        className="task-card glass-effect rounded-xl p-6"
       >
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <motion.h3
               layout="position"
-              className="text-lg font-semibold text-gray-900 flex items-center gap-2"
+              className="text-lg font-semibold text-gray-900 flex items-center gap-3"
             >
               <span>{task.title}</span>
               <motion.span
                 layout
-                className={`px-2 py-1 text-xs rounded-full ${
+                className={`status-badge ${
                   task.status === "completed"
-                    ? "bg-green-100 text-green-800"
-                    : "bg-yellow-100 text-yellow-800"
+                    ? "status-badge-completed"
+                    : "status-badge-pending"
                 }`}
               >
                 {task.status}
               </motion.span>
             </motion.h3>
-            <motion.p layout="position" className="mt-1 text-sm text-gray-600">
+            <motion.p layout="position" className="mt-2 text-sm text-gray-600">
               {task.description}
             </motion.p>
-            <motion.p layout="position" className="mt-2 text-xs text-gray-500">
+            <motion.p
+              layout="position"
+              className="mt-3 text-xs font-medium text-gray-500"
+            >
               Due: {formatDate(task.dueDate)}
             </motion.p>
           </div>
 
-          <div className="flex items-center space-x-2 ml-4">
+          <div className="flex items-center space-x-3 ml-4">
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleToggleStatus}
               disabled={loading}
-              className="p-2 text-gray-400 hover:text-green-500 disabled:opacity-50 transition-colors"
+              className="p-2 text-gray-400 hover:text-emerald-500 disabled:opacity-50 transition-colors"
               title={
                 task.status === "completed"
                   ? "Mark as pending"
@@ -131,7 +134,7 @@ export default function TaskCard({ task, onUpdate }) {
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsEditing(true)}
               disabled={loading}
-              className="p-2 text-gray-400 hover:text-blue-500 disabled:opacity-50 transition-colors"
+              className="p-2 text-gray-400 hover:text-purple-500 disabled:opacity-50 transition-colors"
               title="Edit task"
             >
               <svg
@@ -154,7 +157,7 @@ export default function TaskCard({ task, onUpdate }) {
               whileTap={{ scale: 0.95 }}
               onClick={() => setShowDeleteDialog(true)}
               disabled={loading}
-              className="p-2 text-gray-400 hover:text-red-500 disabled:opacity-50 transition-colors"
+              className="p-2 text-gray-400 hover:text-pink-500 disabled:opacity-50 transition-colors"
               title="Delete task"
             >
               <svg
@@ -187,7 +190,10 @@ export default function TaskCard({ task, onUpdate }) {
             onClose={() => setShowDeleteDialog(false)}
             className="relative z-50"
           >
-            <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+            <div
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+              aria-hidden="true"
+            />
 
             <div className="fixed inset-0 flex items-center justify-center p-4">
               <Dialog.Panel
@@ -195,27 +201,27 @@ export default function TaskCard({ task, onUpdate }) {
                 initial={{ scale: 0.95 }}
                 animate={{ scale: 1 }}
                 exit={{ scale: 0.95 }}
-                className="mx-auto max-w-sm rounded-lg bg-white p-6 shadow-xl"
+                className="mx-auto max-w-sm rounded-xl glass-effect p-6"
               >
-                <Dialog.Title className="text-lg font-medium text-gray-900">
+                <Dialog.Title className="text-lg font-semibold text-gray-900">
                   Delete Task
                 </Dialog.Title>
-                <Dialog.Description className="mt-2 text-sm text-gray-500">
+                <Dialog.Description className="mt-3 text-sm text-gray-500">
                   Are you sure you want to delete "{task.title}"? This action
                   cannot be undone.
                 </Dialog.Description>
 
-                <div className="mt-4 flex justify-end space-x-3">
+                <div className="mt-6 flex justify-end space-x-3">
                   <button
                     type="button"
-                    className="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                    className="px-4 py-2.5 text-sm font-medium text-gray-700 bg-white/90 border border-gray-300 rounded-lg hover:bg-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
                     onClick={() => setShowDeleteDialog(false)}
                   >
                     Cancel
                   </button>
                   <button
                     type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                    className="px-4 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-pink-500 to-rose-600 rounded-lg hover:from-pink-600 hover:to-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2"
                     onClick={handleDelete}
                   >
                     Delete

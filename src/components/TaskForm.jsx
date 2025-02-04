@@ -43,26 +43,27 @@ export default function TaskForm({ task, onSuccess, onCancel }) {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
+      className="p-6"
     >
-      <form action={handleSubmit} className="space-y-4 p-4 sm:p-6">
+      <form action={handleSubmit} className="space-y-6">
         <AnimatePresence mode="wait">
           {error && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="p-3 text-sm text-red-500 bg-red-50 rounded-md"
+              className="p-4 text-sm text-pink-500 bg-pink-50 rounded-lg border border-pink-200"
             >
               {error}
             </motion.div>
           )}
         </AnimatePresence>
 
-        <div className="grid gap-4 sm:gap-6">
+        <div className="grid gap-6">
           <div>
             <label
               htmlFor="title"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-gray-900 mb-2"
             >
               Title
             </label>
@@ -73,7 +74,7 @@ export default function TaskForm({ task, onSuccess, onCancel }) {
               defaultValue={task?.title}
               required
               maxLength={100}
-              className="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 placeholder:text-gray-400"
+              className="form-input"
               placeholder="Enter task title"
             />
           </div>
@@ -81,7 +82,7 @@ export default function TaskForm({ task, onSuccess, onCancel }) {
           <div>
             <label
               htmlFor="description"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-gray-900 mb-2"
             >
               Description
             </label>
@@ -92,7 +93,7 @@ export default function TaskForm({ task, onSuccess, onCancel }) {
               required
               maxLength={500}
               rows={3}
-              className="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 placeholder:text-gray-400"
+              className="form-input"
               placeholder="Enter task description"
             />
           </div>
@@ -100,7 +101,7 @@ export default function TaskForm({ task, onSuccess, onCancel }) {
           <div>
             <label
               htmlFor="dueDate"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-gray-900 mb-2"
             >
               Due Date
             </label>
@@ -114,7 +115,7 @@ export default function TaskForm({ task, onSuccess, onCancel }) {
                   : ""
               }
               required
-              className="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="form-input"
             />
           </div>
         </div>
@@ -126,7 +127,7 @@ export default function TaskForm({ task, onSuccess, onCancel }) {
               whileTap={{ scale: 0.98 }}
               type="button"
               onClick={onCancel}
-              className="w-full sm:w-auto px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="w-full sm:w-auto px-4 py-2.5 text-sm font-medium text-gray-700 bg-white/90 border border-gray-300 rounded-lg hover:bg-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
             >
               Cancel
             </motion.button>
@@ -136,7 +137,7 @@ export default function TaskForm({ task, onSuccess, onCancel }) {
             whileTap={{ scale: 0.98 }}
             type="submit"
             disabled={loading}
-            className="w-full sm:w-auto px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+            className="w-full sm:w-auto btn-primary disabled:opacity-50"
           >
             {loading ? (
               <span className="flex items-center justify-center">
